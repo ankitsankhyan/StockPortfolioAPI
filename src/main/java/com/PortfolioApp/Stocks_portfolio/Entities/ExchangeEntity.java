@@ -19,9 +19,8 @@ public class ExchangeEntity {
     @JoinColumn(name = "user_id", nullable = false) // Foreign key column in the database
     private UserEntity user;
 
-
-
     @Enumerated(EnumType.STRING)
     private  TransactionType type;
 
+    private Integer quantity;
 }

@@ -1,12 +1,12 @@
 package com.PortfolioApp.Stocks_portfolio.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +17,11 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int UserId;
+
+    @OneToMany(mappedBy = "u")
+    List<StockHolding> holdingList = new ArrayList<>();
+
+
 
     private String name;
 }
