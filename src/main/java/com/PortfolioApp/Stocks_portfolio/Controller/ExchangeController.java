@@ -1,0 +1,30 @@
+package com.PortfolioApp.Stocks_portfolio.Controller;
+
+import com.PortfolioApp.Stocks_portfolio.Service.ExchangeService;
+import com.PortfolioApp.Stocks_portfolio.dto.ExchangeDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(path = "trading")
+public class ExchangeController {
+    private ExchangeService exchangeService;
+    ExchangeController(ExchangeService exchangeService){
+        this.exchangeService = exchangeService;
+    }
+    @PostMapping(path = "/exchange")
+    public ResponseEntity<String> exchangeStock(@RequestBody ExchangeDTO exchangeDTO){
+            if(exchangeDTO == null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request");
+            }
+            System.out.println("working bro");
+            String response = exchangeService.exhangeStock(exchangeDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+}
