@@ -19,12 +19,17 @@ public class ExchangeController {
     }
     @PostMapping(path = "/exchange")
     public ResponseEntity<String> exchangeStock(@RequestBody ExchangeDTO exchangeDTO){
+        try{
             if(exchangeDTO == null){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request");
             }
             System.out.println("working bro");
             String response = exchangeService.exhangeStock(exchangeDTO);
             return ResponseEntity.status(HttpStatus.OK).body(response);
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error" + e.getMessage());
+        }
+
     }
 
 }

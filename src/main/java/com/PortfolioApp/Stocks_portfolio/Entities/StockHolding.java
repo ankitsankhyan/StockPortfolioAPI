@@ -29,35 +29,35 @@ public class StockHolding {
     @JoinColumn(name = "stock_id", nullable = false)
     private StockEntity stock;
 
- public double getPrice() {
-  return price;
- }
+    public double getPrice() {
+     return price;
+    }
 
- public void setPrice(double price) {
-  this.price = price;
- }
+    public void setPrice(double price) {
+     this.price = price;
+    }
 
- public double getQuantity() {
-  return quantity;
- }
+    public double getQuantity() {
+     return quantity;
+    }
 
- public void setQuantity(double quantity) {
-  this.quantity = quantity;
- }
+    public void setQuantity(double quantity) {
+     this.quantity = quantity;
+    }
 
- public UserEntity getUser() {
-  return user;
- }
+    public UserEntity getUser() {
+     return user;
+    }
 
- public void setUser(UserEntity user) {
-  this.user = user;
- }
+    public void setUser(UserEntity user) {
+     this.user = user;
+    }
 
- public StockEntity getStock() {
-  return stock;
- }
+    public StockEntity getStock() {
+     return stock;
+    }
 
- public void setStock(StockEntity stock) {
-  this.stock = stock;
- }
+    public void setStock(StockEntity stock) {
+     this.stock = stock;
+    }
 }
