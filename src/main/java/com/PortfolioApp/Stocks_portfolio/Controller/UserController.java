@@ -3,6 +3,8 @@ package com.PortfolioApp.Stocks_portfolio.Controller;
 import com.PortfolioApp.Stocks_portfolio.Entities.UserEntity;
 import com.PortfolioApp.Stocks_portfolio.Service.CreateUserService;
 import com.PortfolioApp.Stocks_portfolio.dto.UserDTO;
+import com.PortfolioApp.Stocks_portfolio.dto.UserPortfolioDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/user")
+@Tag(name = "User API")
 public class UserController {
     private CreateUserService createUserService;
     UserController(CreateUserService createUserService){
@@ -42,6 +46,23 @@ public class UserController {
         } catch (Exception e) {
             System.err.println("Error in fetching users : " + e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.emptyList());
+        }
+
+    }
+
+    @GetMapping(path = "/get/{id}", produces = "application/json")
+    public ResponseEntity<UserPortfolioDTO> getUser(@PathVariable("id") Integer id){
+        try{
+            Optional<UserPortfolioDTO> userOptional = createUserService.getUserById(id);
+            if(userOptional.isEmpty()){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserPortfolioDTO());
+            }else {
+                UserPortfolioDTO user = userOptional.get();
+                return ResponseEntity.status(HttpStatus.OK).body(user);
+            }
+        }catch(Exception e){
+            System.err.println("Error in fetching users : " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserPortfolioDTO());
         }
 
     }

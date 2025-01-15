@@ -2,6 +2,7 @@ package com.PortfolioApp.Stocks_portfolio.Controller;
 
 import com.PortfolioApp.Stocks_portfolio.Service.ExchangeService;
 import com.PortfolioApp.Stocks_portfolio.dto.ExchangeDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "trading")
+@Tag(name = "Trade API")
 public class ExchangeController {
     private ExchangeService exchangeService;
     ExchangeController(ExchangeService exchangeService){
