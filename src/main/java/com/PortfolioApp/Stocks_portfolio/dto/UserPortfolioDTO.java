@@ -1,5 +1,7 @@
 package com.PortfolioApp.Stocks_portfolio.dto;
 
+import org.apache.catalina.User;
+
 import java.util.List;
 
 public class UserPortfolioDTO {
@@ -12,7 +14,16 @@ public class UserPortfolioDTO {
         public String getEmail() {
         return email;
     }
+       public UserPortfolioDTO(String name, String email, Double totalExpenditure,Double profit,List<StockHoldingDTO>holdingDTOList){
+            this.name = name;
+            this.email =email;
+            this.totalExpenditure = totalExpenditure;
+            this.profit = profit;
+            this.holdingDTOList = holdingDTOList;
+       }
+       public UserPortfolioDTO(){
 
+       }
     public void setEmail(String email) {
         this.email = email;
     }

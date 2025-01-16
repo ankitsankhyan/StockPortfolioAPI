@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
 
 @Entity
 public class UserEntity {
@@ -21,7 +19,15 @@ public class UserEntity {
     private String email;
     @OneToMany(mappedBy = "user")
     List<StockHolding> holdingList = new ArrayList<>();
+    public UserEntity(){
 
+    }
+    public UserEntity(int id, String name, String email, List<StockHolding> holdingList){
+        this.name = name;
+        this.email =email;
+        this.id = id;
+        this.holdingList = holdingList;
+    }
     public int getId() {
         return id;
     }
