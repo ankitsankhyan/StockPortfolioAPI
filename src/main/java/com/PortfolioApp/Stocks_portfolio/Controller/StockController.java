@@ -59,4 +59,9 @@ public class StockController {
         }
     }
 
+    @GetMapping(path = "/get" , produces = "application/json")
+    public List<StockEntity> getallStocks(){
+        return getStocksService.getAllStocks();
+    }
+
 }
