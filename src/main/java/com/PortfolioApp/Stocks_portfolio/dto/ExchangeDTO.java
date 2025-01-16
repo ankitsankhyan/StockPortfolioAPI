@@ -1,5 +1,6 @@
 package com.PortfolioApp.Stocks_portfolio.dto;
 
+import com.PortfolioApp.Stocks_portfolio.Controller.ExchangeController;
 import com.PortfolioApp.Stocks_portfolio.Entities.TransactionType;
 
 public class ExchangeDTO {
@@ -7,7 +8,7 @@ public class ExchangeDTO {
     private TransactionType type;
     private double quantity;
     private int stockId;
-    ExchangeDTO(){
+    public  ExchangeDTO(){
 
     }
 
