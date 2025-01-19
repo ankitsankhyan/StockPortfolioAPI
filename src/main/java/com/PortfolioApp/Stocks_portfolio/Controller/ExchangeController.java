@@ -1,5 +1,6 @@
 package com.PortfolioApp.Stocks_portfolio.Controller;
 
+import com.PortfolioApp.Stocks_portfolio.KafkaProducer.TradeProducer;
 import com.PortfolioApp.Stocks_portfolio.Service.ExchangeService;
 import com.PortfolioApp.Stocks_portfolio.dto.ExchangeDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Trade API")
 public class ExchangeController {
     private ExchangeService exchangeService;
-    ExchangeController(ExchangeService exchangeService){
+    private TradeProducer tradeProducer;
+    ExchangeController(ExchangeService exchangeService,TradeProducer tradeProducer){
         this.exchangeService = exchangeService;
+        this.tradeProducer = tradeProducer;
     }
     @PostMapping(path = "/exchange")
     public ResponseEntity<String> exchangeStock(@RequestBody ExchangeDTO exchangeDTO){
@@ -25,9 +28,8 @@ public class ExchangeController {
             if(exchangeDTO == null){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request");
             }
-            System.out.println("working bro");
-            String response = exchangeService.exhangeStock(exchangeDTO);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+            tradeProducer.sendData(exchangeDTO);
+            return ResponseEntity.status(HttpStatus.OK).body("Exchange is completed");
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error" + e.getMessage());
         }
